@@ -39,6 +39,14 @@ class DetailBeritaActivity : MyActivity() {
     @SuppressLint("SetTextI18n")
     private fun getIntentExtra() {
         berita = getStringExtra().toModel(Berita::class.java) ?: Berita()
+
+        setData()
+        loadBeritaByCategory(berita.slugCategory)
+        getDetailBerita(berita.slug)
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun setData() {
         binding.apply {
             tvJudul.text = berita.name
             tvAuthor.text = berita.author
@@ -49,7 +57,6 @@ class DetailBeritaActivity : MyActivity() {
             val htmlSpan = Html.fromHtml(berita.description ?: "", Html.FROM_HTML_MODE_COMPACT, p, null)
             tvBerita.text = htmlSpan
         }
-        loadBeritaByCategory(berita.slugCategory)
     }
 
     private fun setupAdapter() {
@@ -64,6 +71,24 @@ class DetailBeritaActivity : MyActivity() {
                     val list = it.data?.filter { it.id != berita.id }
                     adapter.addItem(list ?: emptyList())
                     binding.tvKosong.visible(list.isNullOrEmpty())
+                }
+                State.ERROR -> {
+
+                }
+                State.LOADING -> {
+
+                }
+            }
+        })
+    }
+
+    private fun getDetailBerita(slug: String?) {
+        viewModel.getDetailBerita(slug).observe(this, {
+            when (it.state) {
+                State.SUCCESS -> {
+                    adapter.clear()
+                    berita = it.data ?: Berita()
+                    setData()
                 }
                 State.ERROR -> {
 

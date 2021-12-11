@@ -5,5 +5,6 @@ import com.example.smashnews.core.data.source.remote.model.Category
 
 data class Data(
     val categories: List<Category> = emptyList(),
-    val articles: List<Berita> = emptyList()
+    val articles: List<Berita> = emptyList(),
+    val article: Berita = Berita()
 )

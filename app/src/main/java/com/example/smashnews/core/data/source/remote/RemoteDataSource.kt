@@ -10,4 +10,6 @@ class RemoteDataSource(private val api: ApiService) {
 
     suspend fun getBeritaBySubCategory(id: String?) = api.getBeritaBySubCategory(id)
 
+    suspend fun getDetailBerita(id: String?) = api.getDetailBerita(id)
+
 }
