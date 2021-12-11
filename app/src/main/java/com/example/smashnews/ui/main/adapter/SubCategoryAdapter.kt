@@ -9,7 +9,7 @@ import com.example.smashnews.core.data.source.remote.model.Category
 import com.example.smashnews.databinding.ItemCategoryBinding
 import com.inyongtisto.myhelper.extension.logs
 
-class SubCategoryAdapter(var onClick: ((Int) -> Unit?)? = null) : RecyclerView.Adapter<SubCategoryAdapter.ViewHolder>() {
+class SubCategoryAdapter(var onClick: ((Category) -> Unit?)? = null) : RecyclerView.Adapter<SubCategoryAdapter.ViewHolder>() {
 
     private var data = ArrayList<Category>()
     private var indexSelected = 0
@@ -65,7 +65,7 @@ class SubCategoryAdapter(var onClick: ((Int) -> Unit?)? = null) : RecyclerView.A
                 }
 
                 lyMain.setOnClickListener {
-                    onClick?.invoke(adapterPosition)
+                    onClick?.invoke(a)
                     indexSelected = adapterPosition
                     notifyDataSetChanged()
                 }

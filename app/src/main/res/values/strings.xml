@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">smashnews</string>
+    <string name="app_name">Smashnews</string>
     <string name="title_activity_nav">NavActivity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
@@ -7,4 +7,5 @@
     <string name="judul_berita">Judul berita</string>
     <string name="all">All</string>
     <string name="berita">Berita</string>
+    <string name="baca_lainnya">Baca Lainnya</string>
 </resources>

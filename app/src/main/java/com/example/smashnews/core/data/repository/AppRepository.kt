@@ -40,4 +40,20 @@ class AppRepository(val local: LocalDataSource, val remote: RemoteDataSource) {
             emit(Resource.error(e.message ?: "Terjadi Kesalahan", null))
         }
     }
+
+    fun getBeritaBySubCategory(id: String?) = flow {
+        emit(Resource.loading(null))
+        try {
+            remote.getBeritaBySubCategory(id).let {
+                if (it.isSuccessful) {
+                    val body = it.body()
+                    emit(Resource.success(body?.data?.articles))
+                } else {
+                    emit(Resource.error(it.getErrorBody()?.message ?: "Default error dongs", null))
+                }
+            }
+        } catch (e: Exception) {
+            emit(Resource.error(e.message ?: "Terjadi Kesalahan", null))
+        }
+    }
 }

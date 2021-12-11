@@ -14,6 +14,11 @@ interface ApiService {
         @Path("id") int: String?
     ): Response<MainResponse>
 
+    @GET("article/sub-category/{id}")
+    suspend fun getBeritaBySubCategory(
+        @Path("id") int: String?
+    ): Response<MainResponse>
+
 //
 //    // "https://127.0.0.1:8000/api/register"
 //    @POST("register")
