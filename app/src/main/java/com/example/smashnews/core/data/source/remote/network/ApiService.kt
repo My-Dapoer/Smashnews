@@ -6,8 +6,14 @@ import retrofit2.http.*
 
 interface ApiService {
 
-    @POST("categories")
+    @GET("categories")
     suspend fun getCategory(): Response<MainResponse>
+
+    @GET("article/category/{id}")
+    suspend fun getBeritaByCategory(
+        @Path("id") int: String?
+    ): Response<MainResponse>
+
 //
 //    // "https://127.0.0.1:8000/api/register"
 //    @POST("register")

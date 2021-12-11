@@ -6,7 +6,7 @@
     android:layout_width="wrap_content"
     android:layout_height="@dimen/_24sdp"
     android:layout_marginVertical="@dimen/_5sdp"
-    android:layout_marginEnd="@dimen/_8sdp"
+    android:layout_marginHorizontal="@dimen/_5sdp"
     android:backgroundTint="@color/grey1"
     app:cardCornerRadius="@dimen/_15sdp">
 
@@ -18,7 +18,7 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:paddingHorizontal="@dimen/_10sdp"
-        android:text="All"
-        android:textAppearance="@style/TypographyStyles.Text3" />
+        android:text="@string/all"
+        android:textAppearance="@style/TypographyStyles.Text3.Bold" />
 
 </com.google.android.material.card.MaterialCardView>
