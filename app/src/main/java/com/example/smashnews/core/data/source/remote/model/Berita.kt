@@ -5,7 +5,7 @@ data class Berita(
     val categoryable_id: String? = null,
     val categoryable_type: String? = null,
     val created_at: Any? = null,
-    val description: String? = null,
+    var description: String? = null,
     val id: Int? = null,
     val image: String? = null,
     val name: String? = null,

@@ -64,7 +64,13 @@ class BeritaAdapter(var onClick: ((data: Berita) -> Unit?)? = null) : RecyclerVi
                 Picasso.get().load(Constants.IMAGE_URL + a.image).into(image)
                 a.slugCategory = slugCategory
                 lyMain.setOnClickListener {
-                    root.context.intentActivity(DetailBeritaActivity::class.java, a.toJson())
+                    try {
+                        root.context.intentActivity(DetailBeritaActivity::class.java, a.toJson())
+                    } catch (e: Exception) {
+                        a.description = null
+                        root.context.intentActivity(DetailBeritaActivity::class.java, a.toJson())
+                    }
+
                 }
             }
         }

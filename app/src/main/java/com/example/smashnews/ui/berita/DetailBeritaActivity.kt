@@ -46,7 +46,7 @@ class DetailBeritaActivity : MyActivity() {
             Picasso.get().load(Constants.IMAGE_URL + berita.image).into(binding.imageBerita)
 //            tvBerita.text = Html.fromHtml(berita.description, Html.FROM_HTML_MODE_COMPACT)
             val p = URLImageParser(tvBerita, this@DetailBeritaActivity)
-            val htmlSpan = Html.fromHtml(berita.description, Html.FROM_HTML_MODE_COMPACT, p, null)
+            val htmlSpan = Html.fromHtml(berita.description ?: "", Html.FROM_HTML_MODE_COMPACT, p, null)
             tvBerita.text = htmlSpan
         }
         loadBeritaByCategory(berita.slugCategory)
