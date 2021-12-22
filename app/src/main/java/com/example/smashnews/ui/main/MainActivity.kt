@@ -24,51 +24,71 @@ class MainActivity : MyActivity() {
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setupAdapterCategory()
-        setupViewPager()
-        getCategory()
+//        setupAdapterCategory()
+//        setupViewPager()
+//        getCategory()
     }
 
-    private fun setupViewPager() {
-        binding.mainViewPager.adapter = MainSlidePageAdapter(this)
-        binding.mainViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-                binding.rvKategori.post {
-                    binding.rvKategori.smoothScrollToPosition(position)
-                }
-                adapter.setSelected(position)
-            }
-        })
-    }
-
-    private fun setupAdapterCategory() {
-        binding.rvKategori.adapter = adapter
-        adapter.onClick = {
-            binding.mainViewPager.setCurrentItem(it, true)
-        }
-    }
-
-    private fun getCategory() {
-        viewModel.getCategory().observe(this, {
-            when (it.state) {
-                State.SUCCESS -> {
-                    displayData(it.data ?: emptyList())
-                }
-                State.ERROR -> {
-                    toastError(it.message ?: "Error")
-                }
-                State.LOADING -> {
-
-                }
-            }
-        })
-    }
-
-    private fun displayData(list: List<Category>) {
-        binding.mainViewPager.adapter = MainSlidePageAdapter(this@MainActivity, list)
-        binding.mainViewPager.setCurrentItem(0, false)
-        adapter.addItem(list)
-    }
+//    private fun setupViewPager() {
+//        binding.appBarNav.apply {
+//            mainViewPager.adapter = MainSlidePageAdapter(this@NavActivity)
+//            mainViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+//                override fun onPageSelected(position: Int) {
+//                    super.onPageSelected(position)
+//                    rvKategori.post {
+//                        rvKategori.smoothScrollToPosition(position)
+//                    }
+//                    adapter.setSelected(position)
+//                }
+//            })
+//        }
+//    }
+//
+//    private fun setupAdapterCategory() {
+//        binding.appBarNav.apply {
+//            rvKategori.adapter = adapter
+//            adapter.onClick = {
+//                mainViewPager.setCurrentItem(it, true)
+//            }
+//        }
+//    }
+//
+//    private fun getCategory() {
+//        viewModel.getCategory().observe(this, {
+//            when (it.state) {
+//                State.SUCCESS -> {
+//                    displayData(it.data ?: emptyList(), "category")
+//                }
+//                State.ERROR -> {
+//                    toastError(it.message ?: "Error")
+//                }
+//                State.LOADING -> {
+//
+//                }
+//            }
+//        })
+//    }
+//
+//    private fun getTags() {
+//        viewModel.getTags().observe(this, {
+//            when (it.state) {
+//                State.SUCCESS -> {
+//                    displayData(it.data ?: emptyList(), "tag")
+//                }
+//                State.ERROR -> {
+//                    toastError(it.message ?: "Error")
+//                }
+//                State.LOADING -> {
+//
+//                }
+//            }
+//        })
+//    }
+//
+//    private fun displayData(list: List<Category>, type: String) {
+//        binding.appBarNav.mainViewPager.adapter = MainSlidePageAdapter(this, list, type)
+//        binding.appBarNav.mainViewPager.setCurrentItem(0, false)
+//        adapter.addItem(list)
+//    }
 
 }

@@ -24,4 +24,13 @@
         <item name="android:textColorPrimary">@color/dark</item>
         <item name="textAllCaps">false</item>
     </style>
+
+    <style name="Theme.Smashnews.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.Smashnews.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.Smashnews.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

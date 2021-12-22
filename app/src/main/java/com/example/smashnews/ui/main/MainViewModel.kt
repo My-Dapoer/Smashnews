@@ -13,4 +13,8 @@ class MainViewModel(private val repo: AppRepository) : ViewModel() {
     fun getBeritaBySubCategory(id: String?) = repo.getBeritaBySubCategory(id).asLiveData()
 
     fun getDetailBerita(id: String?) = repo.getDetailBerita(id).asLiveData()
+
+    fun getTags() = repo.getTags().asLiveData()
+
+    fun getBeritaByTag(id: String?) = repo.getBeritaByTag(id).asLiveData()
 }

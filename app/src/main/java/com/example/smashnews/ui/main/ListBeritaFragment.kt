@@ -16,7 +16,7 @@ import com.inyongtisto.myhelper.extension.string
 import com.inyongtisto.myhelper.extension.visible
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ListBeritaFragment(private val category: Category) : Fragment() {
+class ListBeritaFragment(private val category: Category, private val type: String) : Fragment() {
 
     private val viewModel: MainViewModel by viewModel()
 
@@ -79,7 +79,11 @@ class ListBeritaFragment(private val category: Category) : Fragment() {
     }
 
     private fun loadBeritaByCategory() {
-        viewModel.getBeritaByCategory(category.slug).observe(requireActivity(), {
+        val api =
+            if (type == "category") viewModel.getBeritaByCategory(category.slug)
+            else viewModel.getBeritaByTag(category.slug)
+
+        api.observe(requireActivity(), {
             when (it.state) {
                 State.SUCCESS -> {
                     binding.swipeRefresh.isRefreshing = false
@@ -119,6 +123,6 @@ class ListBeritaFragment(private val category: Category) : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(category: Category) = ListBeritaFragment(category)
+        fun newInstance(category: Category, type: String) = ListBeritaFragment(category, type)
     }
 }
