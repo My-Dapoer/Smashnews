@@ -14,7 +14,8 @@ import com.inyongtisto.myhelper.extension.intentActivity
 import com.inyongtisto.myhelper.extension.toJson
 import com.squareup.picasso.Picasso
 
-class BeritaAdapter(var onClick: ((data: Berita) -> Unit?)? = null) : RecyclerView.Adapter<BeritaAdapter.ViewHolder>() {
+class BeritaAdapter(var onClick: ((data: Berita) -> Unit?)? = null) :
+    RecyclerView.Adapter<BeritaAdapter.ViewHolder>() {
 
     private var data = ArrayList<Berita>()
     private var slugCategory = ""
@@ -23,11 +24,11 @@ class BeritaAdapter(var onClick: ((data: Berita) -> Unit?)? = null) : RecyclerVi
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         contex = parent.context
         return ViewHolder(
-                ItemBeritaBinding.inflate(
-                        LayoutInflater.from(parent.context),
-                        parent,
-                        false
-                )
+            ItemBeritaBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
         )
     }
 
@@ -53,7 +54,8 @@ class BeritaAdapter(var onClick: ((data: Berita) -> Unit?)? = null) : RecyclerVi
 
     override fun getItemCount(): Int = data.size
 
-    inner class ViewHolder(private val itemBinding: ItemBeritaBinding) : RecyclerView.ViewHolder(itemBinding.root) {
+    inner class ViewHolder(private val itemBinding: ItemBeritaBinding) :
+        RecyclerView.ViewHolder(itemBinding.root) {
         @SuppressLint("SetTextI18n")
         fun bind(position: Int) {
             with(itemBinding) {
@@ -64,13 +66,8 @@ class BeritaAdapter(var onClick: ((data: Berita) -> Unit?)? = null) : RecyclerVi
                 Picasso.get().load(Constants.IMAGE_URL + a.image).into(image)
                 a.slugCategory = slugCategory
                 lyMain.setOnClickListener {
-                    try {
-                        root.context.intentActivity(DetailBeritaActivity::class.java, a.toJson())
-                    } catch (e: Exception) {
-                        a.description = null
-                        root.context.intentActivity(DetailBeritaActivity::class.java, a.toJson())
-                    }
-
+                    a.description = null
+                    root.context.intentActivity(DetailBeritaActivity::class.java, a.toJson())
                 }
             }
         }
