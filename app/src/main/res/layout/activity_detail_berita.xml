@@ -59,7 +59,6 @@
                 android:src="@drawable/image_loading"
                 tools:ignore="ContentDescription" />
 
-
             <TextView
                 android:id="@+id/tv_berita"
                 android:layout_width="match_parent"
@@ -68,6 +67,17 @@
                 android:text="isi"
                 android:textColor="@color/dark"
                 android:textSize="@dimen/_11sdp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_response"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="5"
+                tools:itemCount="5"
+                tools:listitem="@layout/item_response" />
 
             <View
                 android:layout_width="match_parent"

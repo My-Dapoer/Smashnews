@@ -3,6 +3,7 @@ package com.example.smashnews.ui.main
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.example.smashnews.core.data.repository.AppRepository
+import com.example.smashnews.core.data.source.remote.request.ResponseRequest
 
 class MainViewModel(private val repo: AppRepository) : ViewModel() {
 
@@ -17,4 +18,6 @@ class MainViewModel(private val repo: AppRepository) : ViewModel() {
     fun getTags() = repo.getTags().asLiveData()
 
     fun getBeritaByTag(id: String?) = repo.getBeritaByTag(id).asLiveData()
+
+    fun postResponse(data: ResponseRequest?) = repo.postResponse(data).asLiveData()
 }

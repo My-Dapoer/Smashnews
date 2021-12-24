@@ -1,5 +1,6 @@
 package com.example.smashnews.core.data.source.remote.network
 
+import com.example.smashnews.core.data.source.remote.request.ResponseRequest
 import com.example.smashnews.core.data.source.remote.response.MainResponse
 import retrofit2.Response
 import retrofit2.http.*
@@ -32,4 +33,8 @@ interface ApiService {
         @Path("id") int: String?
     ): Response<MainResponse>
 
+    @POST("submit-response")
+    suspend fun postResponse(
+        @Body body: ResponseRequest?
+    ): Response<MainResponse>
 }

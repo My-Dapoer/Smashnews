@@ -22,11 +22,12 @@ import com.example.smashnews.databinding.ActivityNavBinding
 import com.example.smashnews.ui.adapter.MainSlidePageAdapter
 import com.example.smashnews.ui.main.MainViewModel
 import com.example.smashnews.ui.main.adapter.CategoryAdapter
+import com.inyongtisto.myhelper.base.BaseActivity
 import com.inyongtisto.myhelper.extension.logs
 import com.inyongtisto.myhelper.extension.toastError
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class NavActivity : AppCompatActivity() {
+class NavActivity : BaseActivity() {
 
     private val viewModel: MainViewModel by viewModel()
 
@@ -131,7 +132,9 @@ class NavActivity : AppCompatActivity() {
                 R.id.nav_tag -> {
                     getTags()
                 }
-                R.id.nav_informasi -> {}
+                R.id.nav_informasi -> {
+
+                }
             }
 
             drawerLayout.closeDrawer(GravityCompat.START)

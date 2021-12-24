@@ -1,6 +1,7 @@
 package com.example.smashnews.core.data.source.remote
 
 import com.example.smashnews.core.data.source.remote.network.ApiService
+import com.example.smashnews.core.data.source.remote.request.ResponseRequest
 
 class RemoteDataSource(private val api: ApiService) {
 
@@ -15,5 +16,7 @@ class RemoteDataSource(private val api: ApiService) {
     suspend fun getTags() = api.getTags()
 
     suspend fun getBeritaByTag(id: String?) = api.getBeritaByTag(id)
+
+    suspend fun postResponse(data: ResponseRequest?) = api.postResponse(data)
 
 }

@@ -4,9 +4,12 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Html
 import com.example.smashnews.core.data.source.remote.model.Berita
+import com.example.smashnews.core.data.source.remote.model.Response
 import com.example.smashnews.core.data.source.remote.network.State
+import com.example.smashnews.core.data.source.remote.request.ResponseRequest
 import com.example.smashnews.databinding.ActivityDetailBeritaBinding
 import com.example.smashnews.ui.base.MyActivity
+import com.example.smashnews.ui.berita.adapter.ResponseAdapter
 import com.example.smashnews.ui.main.MainViewModel
 import com.example.smashnews.ui.main.adapter.BeritaAdapter
 import com.example.smashnews.util.Constants
@@ -23,6 +26,7 @@ class DetailBeritaActivity : MyActivity() {
     private var _binding: ActivityDetailBeritaBinding? = null
     private val binding get() = _binding!!
     private val adapter = BeritaAdapter()
+    private val adapterResponse = ResponseAdapter()
     private var berita = Berita()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,17 +54,23 @@ class DetailBeritaActivity : MyActivity() {
         binding.apply {
             tvJudul.text = berita.name
             tvAuthor.text = berita.author
-            tvTgl.text = berita.publish_at?.convertTanggal(berita.publish_at!!, "dd MMMM yyy kk:mm") + " WIB"
+            tvTgl.text =
+                berita.publish_at?.convertTanggal(berita.publish_at!!, "dd MMMM yyy kk:mm") + " WIB"
             Picasso.get().load(Constants.IMAGE_URL + berita.image).into(binding.imageBerita)
 //            tvBerita.text = Html.fromHtml(berita.description, Html.FROM_HTML_MODE_COMPACT)
             val p = URLImageParser(tvBerita, this@DetailBeritaActivity)
-            val htmlSpan = Html.fromHtml(berita.description ?: "", Html.FROM_HTML_MODE_COMPACT, p, null)
+            val htmlSpan =
+                Html.fromHtml(berita.description ?: "", Html.FROM_HTML_MODE_COMPACT, p, null)
             tvBerita.text = htmlSpan
         }
     }
 
     private fun setupAdapter() {
         binding.rvBerita.adapter = adapter
+        binding.rvResponse.adapter = adapterResponse
+        adapterResponse.onClick = {
+            postResponse(it)
+        }
     }
 
     private fun loadBeritaByCategory(slugCategory: String?) {
@@ -82,12 +92,46 @@ class DetailBeritaActivity : MyActivity() {
         })
     }
 
+    private var sendResponse = false
+    private fun postResponse(response: Response) {
+
+        if (sendResponse) {
+            toastWarning("Respon hanya bisa dikirim sekali")
+            return
+        }
+
+        val body = ResponseRequest(
+            article = berita.slug,
+            response = response.slug
+        )
+
+        viewModel.postResponse(body).observe(this, {
+            when (it.state) {
+                State.SUCCESS -> {
+                    sendResponse = true
+                    progress.dismiss()
+                    getDetailBerita(berita.slug)
+                    toastSuccess("Response berhasil dikirim")
+                }
+                State.ERROR -> {
+                    progress.dismiss()
+                    toastError(it.message ?: "Terjadi kesalahan")
+                }
+                State.LOADING -> {
+                    progress.show()
+                }
+            }
+        })
+    }
+
     private fun getDetailBerita(slug: String?) {
         viewModel.getDetailBerita(slug).observe(this, {
             when (it.state) {
                 State.SUCCESS -> {
                     adapter.clear()
-                    berita = it.data ?: Berita()
+                    adapterResponse.clear()
+                    berita = it.data?.article ?: Berita()
+                    adapterResponse.addItem(it.data?.responses ?: emptyList())
                     setData()
                 }
                 State.ERROR -> {
