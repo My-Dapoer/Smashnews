@@ -19,4 +19,6 @@ class RemoteDataSource(private val api: ApiService) {
 
     suspend fun postResponse(data: ResponseRequest?) = api.postResponse(data)
 
+    suspend fun getInfo() = api.getInfo()
+
 }

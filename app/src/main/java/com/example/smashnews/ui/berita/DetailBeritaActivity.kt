@@ -139,7 +139,14 @@ class DetailBeritaActivity : MyActivity() {
                     adapterResponse.clear()
                     berita = it.data?.article ?: Berita()
                     adapterResponse.addItem(it.data?.responses ?: emptyList())
+                    binding.tvTag.visible(berita.tags.isNotEmpty())
+                    var tags = ""
+                    berita.tags.forEach { tag ->
+                        tags += "#${tag.name} "
+                    }
+                    binding.tvTag.text = tags
                     setData()
+                    binding.lyPd.toGone()
                 }
                 State.ERROR -> {
 

@@ -37,4 +37,7 @@ interface ApiService {
     suspend fun postResponse(
         @Body body: ResponseRequest?
     ): Response<MainResponse>
+
+    @GET("statis/help")
+    suspend fun getInfo(): Response<MainResponse>
 }

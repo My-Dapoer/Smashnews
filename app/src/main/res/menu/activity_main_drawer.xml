@@ -6,15 +6,15 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_category"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_baseline_menu_book_24"
             android:title="Baca Berita - Ketagory" />
         <item
             android:id="@+id/nav_tag"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_baseline_tag_24"
             android:title="Baca Berita - Tag" />
         <item
             android:id="@+id/nav_informasi"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_baseline_info_24"
             android:title="Informasi" />
     </group>
 

@@ -9,5 +9,6 @@ data class Data(
     val articles: List<Berita> = emptyList(),
     val tags: List<Category> = emptyList(),
     val article: Berita = Berita(),
-    val responses: List<Response> = emptyList()
+    val responses: List<Response> = emptyList(),
+    val static: Berita = Berita(),
 )

@@ -19,10 +19,12 @@ import com.example.smashnews.R
 import com.example.smashnews.core.data.source.remote.model.Category
 import com.example.smashnews.core.data.source.remote.network.State
 import com.example.smashnews.databinding.ActivityNavBinding
+import com.example.smashnews.ui.InformasiActivity
 import com.example.smashnews.ui.adapter.MainSlidePageAdapter
 import com.example.smashnews.ui.main.MainViewModel
 import com.example.smashnews.ui.main.adapter.CategoryAdapter
 import com.inyongtisto.myhelper.base.BaseActivity
+import com.inyongtisto.myhelper.extension.intentActivity
 import com.inyongtisto.myhelper.extension.logs
 import com.inyongtisto.myhelper.extension.toastError
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -133,7 +135,7 @@ class NavActivity : BaseActivity() {
                     getTags()
                 }
                 R.id.nav_informasi -> {
-
+                    intentActivity(InformasiActivity::class.java)
                 }
             }
 

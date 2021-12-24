@@ -20,4 +20,6 @@ class MainViewModel(private val repo: AppRepository) : ViewModel() {
     fun getBeritaByTag(id: String?) = repo.getBeritaByTag(id).asLiveData()
 
     fun postResponse(data: ResponseRequest?) = repo.postResponse(data).asLiveData()
+
+    fun getInfo() = repo.getInfo().asLiveData()
 }

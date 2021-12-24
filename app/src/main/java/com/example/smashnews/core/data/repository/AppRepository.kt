@@ -122,5 +122,21 @@ class AppRepository(val local: LocalDataSource, val remote: RemoteDataSource) {
         }
     }
 
+    fun getInfo() = flow {
+        emit(Resource.loading(null))
+        try {
+            remote.getInfo().let {
+                if (it.isSuccessful) {
+                    val body = it.body()
+                    emit(Resource.success(body?.data?.static))
+                } else {
+                    emit(Resource.error(it.getErrorBody()?.message ?: "Default error dongs", null))
+                }
+            }
+        } catch (e: Exception) {
+            emit(Resource.error(e.message ?: "Terjadi Kesalahan", null))
+        }
+    }
+
 
 }
