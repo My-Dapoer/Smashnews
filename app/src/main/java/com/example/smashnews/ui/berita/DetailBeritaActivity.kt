@@ -13,6 +13,7 @@ import com.example.smashnews.ui.berita.adapter.ResponseAdapter
 import com.example.smashnews.ui.main.MainViewModel
 import com.example.smashnews.ui.main.adapter.BeritaAdapter
 import com.example.smashnews.util.Constants
+import com.example.smashnews.util.Prefs
 import com.inyongtisto.myhelper.extension.*
 import com.squareup.picasso.Picasso
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -100,6 +101,11 @@ class DetailBeritaActivity : MyActivity() {
             return
         }
 
+        if (Prefs.isThereResponse(berita.slug ?: "")) {
+            toastWarning("Respon hanya bisa dikirim sekali")
+            return
+        }
+
         val body = ResponseRequest(
             article = berita.slug,
             response = response.slug
@@ -110,6 +116,7 @@ class DetailBeritaActivity : MyActivity() {
                 State.SUCCESS -> {
                     sendResponse = true
                     progress.dismiss()
+                    Prefs.saveResponse(berita.slug)
                     getDetailBerita(berita.slug)
                     toastSuccess("Response berhasil dikirim")
                 }
