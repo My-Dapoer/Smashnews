@@ -27,7 +27,6 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:paddingVertical="@dimen/_11sdp"
-                android:text="@string/berita"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_14sdp"
                 android:textStyle="bold" />
